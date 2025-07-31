@@ -15,6 +15,15 @@ pipeline {
     }
  
     stages {
+        stage('Check Public IP') {
+            steps {
+                sh '''
+                    echo "Getting Public IP..."
+                    curl http://checkip.amazonaws.com
+                '''
+            }
+        }
+        
         stage('Checkout') {
             steps {
                 git branch: "${params.BRANCH_NAME}", url: 'https://github.com/VishalShindeSankey/devopstest'
